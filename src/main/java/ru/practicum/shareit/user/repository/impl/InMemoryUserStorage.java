@@ -18,7 +18,7 @@ public class InMemoryUserStorage implements UserRepository {
 
     @Override
     public User create(User user) {
-        if (users.values().stream().filter(u -> u.getEmail().equals(user.getEmail())).findAny().isEmpty()) {
+        if (users.values().stream().filter(u -> Objects.equals(u.getEmail(), user.getEmail())).findAny().isEmpty()) {
             user.setId(++id);
             users.put(user.getId(), user);
             log.info("Создан пользователь с email - " + user.getEmail());
