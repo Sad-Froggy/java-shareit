@@ -3,12 +3,14 @@ package ru.practicum.shareit.item.repository.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.apache.commons.lang3.StringUtils;
 import ru.practicum.shareit.exception_handler.exception.EntityNotFoundException;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -69,7 +71,7 @@ public class InMemoryItemStorage implements ItemRepository {
 
     @Override
     public List<Item> searchItem(String text) {
-        if (text.isEmpty() || text.isBlank()) {
+        if (StringUtils.isBlank(text)) {
             log.info("В параметр поиска была передана пустая строка");
             return Collections.emptyList();
         }
@@ -83,9 +85,12 @@ public class InMemoryItemStorage implements ItemRepository {
     }
 
     private void patchItem(Item oldItem, Item newItem) {
-        if (newItem.getName() != null) {
-            oldItem.setName(newItem.getName());
-        }
+        Optional.ofNullable(newItem.getName()).ifPresent(oldItem::setName);
+        Optional.ofNullable(newItem.getDescription()).ifPresent(oldItem::setDescription);
+        Optional.ofNullable(newItem.getRequest()).ifPresent(oldItem::setRequest);
+
+
+
         if (newItem.getDescription() != null) {
             oldItem.setDescription(newItem.getDescription());
         }
