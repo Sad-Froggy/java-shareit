@@ -9,12 +9,12 @@ import ru.practicum.shareit.user.model.User;
 @Setter
 public class Item {
 
-    Long id;
-    String name;
-    String description;
-    Boolean available;
-    User owner;
-    ItemRequest request;
+    private Long id;
+    private String name;
+    private String description;
+    private Boolean available;
+    private User owner;
+    private ItemRequest request;
 
     public Item(Long id, String name, String description, Boolean available, User owner) {
         this.id = id;

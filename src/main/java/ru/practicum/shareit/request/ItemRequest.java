@@ -19,11 +19,11 @@ import java.time.LocalDateTime;
 public class ItemRequest {
 
     @NotNull
-    Long id;
+    private Long id;
     @NotBlank
-    String description;
+    private String description;
     @NotNull
-    User requestor;
+    private User requestor;
     @NotNull
-    LocalDateTime created;
+    private LocalDateTime created;
 }

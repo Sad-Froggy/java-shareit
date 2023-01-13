@@ -13,11 +13,11 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
 
     @NotNull
-    long id;
+    private long id;
     @NotBlank(message = "Имя пользователя не указано")
-    String name;
+    private String name;
     @Email(message = "Введен некорректный email.")
     @NotNull(message = "Email не указан")
-    String email;
+    private String email;
 
 }
