@@ -50,10 +50,10 @@ public class InMemoryItemStorage implements ItemRepository {
     @Override
     public Item getById(Long userId, Long id) {
         Item item = items.get(id);
-        if (item != null) {
-            return item;
-        } else {
+        if (item == null) {
             throw new EntityNotFoundException("Вещи c таким id не существует");
+        } else {
+            return item;
         }
     }
 
