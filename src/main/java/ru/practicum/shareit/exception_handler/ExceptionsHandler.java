@@ -11,8 +11,7 @@ import ru.practicum.shareit.item.ItemController;
 import ru.practicum.shareit.user.controller.UserController;
 
 @Slf4j
-@RestControllerAdvice(assignableTypes = {ItemController.class,
-        UserController.class})
+@RestControllerAdvice(assignableTypes = {ItemController.class, UserController.class})
 
 public class ExceptionsHandler {
 
