@@ -89,17 +89,6 @@ public class InMemoryItemStorage implements ItemRepository {
         Optional.ofNullable(newItem.getDescription()).ifPresent(oldItem::setDescription);
         Optional.ofNullable(newItem.getRequest()).ifPresent(oldItem::setRequest);
 
-
-
-        if (newItem.getDescription() != null) {
-            oldItem.setDescription(newItem.getDescription());
-        }
-        if (newItem.getRequest() != null) {
-            oldItem.setRequest(newItem.getRequest());
-        }
-        if (newItem.getAvailable() != null) {
-            oldItem.setAvailable(newItem.getAvailable());
-        }
         items.put(oldItem.getId(), oldItem);
     }
 
