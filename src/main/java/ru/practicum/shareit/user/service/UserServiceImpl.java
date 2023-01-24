@@ -32,7 +32,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User update(Long userId, UserDto userDto) {
         log.info("Запрос обновления пользователя с id " + userId);
-        User user = userRepository.findById(userId).
+        User user = userRepository
+                .findById(userId).
                 orElseThrow(() -> new EntityNotFoundException("Пользователь с id " + userId + "не найден"));
         if (checkEmail(user, userDto)) {
             Optional.ofNullable(userDto.getEmail()).ifPresent(user::setEmail);

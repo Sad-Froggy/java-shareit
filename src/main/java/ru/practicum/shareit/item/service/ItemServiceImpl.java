@@ -105,15 +105,15 @@ public class ItemServiceImpl implements ItemService {
                 .stream()
                 .collect(groupingBy(Comment::getItem, toList()));
 
-        List<ItemDtoOut> ItemDtoList = new ArrayList<>();
+        List<ItemDtoOut> itemDtoList = new ArrayList<>();
         for (Item item : items) {
             ItemDtoOut itemWithBooking = addBookings(item,
                     bookings.getOrDefault(item, Collections.emptyList()));
             ItemDtoOut itemWithCommentsAndBooking = addComments(itemWithBooking,
                     comments.getOrDefault(item, Collections.emptyList()));
-            ItemDtoList.add(itemWithCommentsAndBooking);
+            itemDtoList.add(itemWithCommentsAndBooking);
         }
-        return ItemDtoList;
+        return itemDtoList;
     }
 
     @Override
