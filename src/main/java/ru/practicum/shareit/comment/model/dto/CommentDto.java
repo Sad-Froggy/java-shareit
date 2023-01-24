@@ -13,9 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDto {
+
     private Long id;
+
     @NotBlank
     private String text;
+
     private String authorName;
+
     private LocalDateTime created = LocalDateTime.now();
 }

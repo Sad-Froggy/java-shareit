@@ -18,8 +18,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @Slf4j
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
 
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
@@ -32,8 +32,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User update(Long userId, UserDto userDto) {
         log.info("Запрос обновления пользователя с id " + userId);
-        User user = userRepository.findById(userId).
-                orElseThrow(() -> new EntityNotFoundException("Пользователь с id " + userId + "не найден"));
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь с id " + userId + "не найден"));
         if (checkEmail(user, userDto)) {
             Optional.ofNullable(userDto.getEmail()).ifPresent(user::setEmail);
         } else throw new DuplicateException("email уже используется");

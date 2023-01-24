@@ -35,8 +35,11 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
+
     private final UserService userService;
+
     private final BookingRepository bookingRepository;
+
     private final CommentRepository commentRepository;
 
 
@@ -105,15 +108,15 @@ public class ItemServiceImpl implements ItemService {
                 .stream()
                 .collect(groupingBy(Comment::getItem, toList()));
 
-        List<ItemDtoOut> ItemDtoList = new ArrayList<>();
+        List<ItemDtoOut> itemDtoList = new ArrayList<>();
         for (Item item : items) {
             ItemDtoOut itemWithBooking = addBookings(item,
                     bookings.getOrDefault(item, Collections.emptyList()));
             ItemDtoOut itemWithCommentsAndBooking = addComments(itemWithBooking,
                     comments.getOrDefault(item, Collections.emptyList()));
-            ItemDtoList.add(itemWithCommentsAndBooking);
+            itemDtoList.add(itemWithCommentsAndBooking);
         }
-        return ItemDtoList;
+        return itemDtoList;
     }
 
     @Override

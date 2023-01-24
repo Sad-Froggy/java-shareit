@@ -13,12 +13,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class BookingDtoIn {
+
     private Long id;
+
     @NotNull
     @FutureOrPresent
     private LocalDateTime start;
+
     @NotNull
     @Future
     private LocalDateTime end;
+
     private Long itemId;
 }
