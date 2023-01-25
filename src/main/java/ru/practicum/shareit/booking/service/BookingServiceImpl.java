@@ -27,6 +27,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
+import static org.apache.commons.lang3.BooleanUtils.isTrue;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -72,9 +75,9 @@ public class BookingServiceImpl implements BookingService {
             if (booking.getStatus() == Status.APPROVED) {
                 throw new BookingException("Booking is already approved.");
             }
-            if (approved.equals(true)) {
+            if (isTrue(approved)) {
                 booking.setStatus(Status.APPROVED);
-            } else if (approved.equals(false)) {
+            } else if (isFalse(approved)) {
                 booking.setStatus(Status.REJECTED);
             } else {
                 throw new ValidationException("Ошибка в параметре approved при обновлении бронирования");
