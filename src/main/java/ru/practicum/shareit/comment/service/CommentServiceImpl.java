@@ -33,7 +33,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto save(CommentDto commentDto, Long itemId, Long userId) {
         log.info("Запрос на добавление комментария к вещи с id " + itemId + " от пользователя с id " + userId);
         Item item = itemService.getItemById(itemId);
-        List<Booking> bookings = bookingRepository.getByBookerIdPastState(
+        List<Booking> bookings = bookingRepository.findByBookerIdAndEndIsBefore(
                         userId,
                         LocalDateTime.now(),
                         Sort.by(Sort.Direction.DESC, "start"))

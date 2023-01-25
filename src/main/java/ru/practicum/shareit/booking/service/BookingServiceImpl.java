@@ -107,22 +107,28 @@ public class BookingServiceImpl implements BookingService {
         if (EnumUtils.isValidEnum(State.class, state)) {
             switch (State.valueOf(state)) {
                 case ALL:
-                    bookings = bookingRepository.getByOwnerId(id, sort);
+                    bookings = bookingRepository.findByItemOwnerId(id, sort);
                     break;
                 case CURRENT:
-                    bookings = bookingRepository.getByOwnerIdCurrentState(id, LocalDateTime.now(), sort);
+                    LocalDateTime currentTime = LocalDateTime.now();
+                    bookings = bookingRepository.findByItemOwnerIdAndEndIsAfterAndStartIsBefore(
+                            id,
+                            currentTime,
+                            currentTime,
+                            sort
+                    );
                     break;
                 case PAST:
-                    bookings = bookingRepository.getByOwnerIdApprovedPastState(id, LocalDateTime.now(), sort);
+                    bookings = bookingRepository.findByItemOwnerIdAndEndIsBefore(id, LocalDateTime.now(), sort);
                     break;
                 case FUTURE:
-                    bookings = bookingRepository.getByOwnerIdApprovedFutureState(id, sort);
+                    bookings = bookingRepository.findByItemOwnerIdAndStartIsAfter(id, LocalDateTime.now(), sort);
                     break;
                 case WAITING:
-                    bookings = bookingRepository.getByOwnerIdWaitingState(id, sort);
+                    bookings = bookingRepository.findByItemOwnerIdAndStatus(id, Status.WAITING, sort);
                     break;
                 case REJECTED:
-                    bookings = bookingRepository.getByOwnerIdRejectedState(id, sort);
+                    bookings = bookingRepository.findByItemOwnerIdAndStatus(id, Status.REJECTED, sort);
                     break;
             }
         } else throw new WrongBookingStateException("Ошибка в параметре состояния");
@@ -138,22 +144,27 @@ public class BookingServiceImpl implements BookingService {
         if (EnumUtils.isValidEnum(State.class, state)) {
             switch (State.valueOf(state)) {
                 case ALL:
-                    bookings = bookingRepository.getByBookerId(id, sort);
+                    bookings = bookingRepository.findByBookerId(id, sort);
                     break;
                 case CURRENT:
-                    bookings = bookingRepository.getAllByBookerCurrenState(id, LocalDateTime.now(), sort);
+                    LocalDateTime currentTime = LocalDateTime.now();
+                    bookings = bookingRepository.findByBookerIdAndEndIsAfterAndStartIsBefore(
+                            id,
+                            currentTime,
+                            currentTime,
+                            sort);
                     break;
                 case PAST:
-                    bookings = bookingRepository.getByBookerIdPastState(id, LocalDateTime.now(), sort);
+                    bookings = bookingRepository.findByBookerIdAndEndIsBefore(id, LocalDateTime.now(), sort);
                     break;
                 case FUTURE:
-                    bookings = bookingRepository.getByBookerIdFutureState(id, sort);
+                    bookings = bookingRepository.findByBookerIdAndStartIsAfter(id, LocalDateTime.now(), sort);
                     break;
                 case WAITING:
-                    bookings = bookingRepository.getByBookerIdWaitingState(id, sort);
+                    bookings = bookingRepository.findByBookerIdAndStatus(id, Status.WAITING, sort);
                     break;
                 case REJECTED:
-                    bookings = bookingRepository.getByBookerIdRejectedState(id, sort);
+                    bookings = bookingRepository.findByBookerIdAndStatus(id, Status.REJECTED, sort);
                     break;
             }
         } else throw new WrongBookingStateException("Ошибка в параметре состояния");

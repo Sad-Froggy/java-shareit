@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.model.Booking;
+import ru.practicum.shareit.booking.model.Status;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.comment.mapper.CommentMapper;
 import ru.practicum.shareit.comment.model.Comment;
@@ -80,8 +81,16 @@ public class ItemServiceImpl implements ItemService {
                 .map(CommentMapper::toCommentDto)
                 .collect(toList()));
 
-        Booking lastBooking = bookingRepository.findLastBooking(LocalDateTime.now(), userId, itemId);
-        Booking nextBooking = bookingRepository.findNextBooking(LocalDateTime.now(), userId, itemId);
+        Booking lastBooking = bookingRepository.findByEndIsBeforeAndItemOwnerIdAndItemId(
+                LocalDateTime.now(),
+                userId,
+                itemId,
+                Sort.by(Sort.Direction.DESC, "start"));
+        Booking nextBooking = bookingRepository.findByStartIsAfterAndItemOwnerIdAndItemId(
+                LocalDateTime.now(),
+                userId,
+                itemId,
+                Sort.by(Sort.Direction.DESC, "start"));
 
         itemResponse.setLastBooking(lastBooking == null ? null : new ItemDtoOut.Booking(
                 lastBooking.getId(),
@@ -96,9 +105,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDtoOut> getAll(Long userId) {
         log.info("Запрос списка всех вещей от пользователя с id " + userId);
-        List<Item> items = itemRepository.findAllByOwnerId(userId);
-        Map<Item, List<Booking>> bookings = bookingRepository.findApprovedForItems(
-                        items, Sort.by(DESC, "start"))
+        List<Item> items = itemRepository.findAllByOwnerId(userId, Sort.by(Sort.Direction.ASC, "id"));
+        Map<Item, List<Booking>> bookings = bookingRepository.findByItemInAndStatus(
+                        items, Status.APPROVED, Sort.by(DESC, "start"))
                 .stream()
                 .collect(groupingBy(Booking::getItem, toList()));
 
