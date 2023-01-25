@@ -5,13 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.comment.mapper.CommentMapper;
 import ru.practicum.shareit.comment.model.Comment;
 import ru.practicum.shareit.comment.repository.CommentRepository;
+import ru.practicum.shareit.exception_handler.exception.EntityNotFoundException;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.model.dto.ItemDtoIn;
@@ -19,7 +19,6 @@ import ru.practicum.shareit.item.model.dto.ItemDtoOut;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserService;
-import ru.practicum.shareit.exception_handler.exception.EntityNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -54,7 +53,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional
     public ItemDtoOut update(ItemDtoIn itemDto, Long userId) {
         log.info("Запрос обновления вещи от пользователя с id " + userId);
         User user = userService.getById(userId);
