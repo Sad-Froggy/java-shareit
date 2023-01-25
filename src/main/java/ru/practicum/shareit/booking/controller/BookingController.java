@@ -42,7 +42,7 @@ public class BookingController {
         return bookingService.getByOwner(userId, state);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<BookingDtoOut> getByBooker(@RequestParam(value = "state", defaultValue = "ALL") String state,
                                            @RequestHeader(USER_ID) Long userId) {
         return bookingService.getByBooker(userId, state);
