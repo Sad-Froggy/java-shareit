@@ -69,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new EntityNotFoundException("Бронирование с id " + bookingId + " не найдено"));
         if (userId.equals(booking.getItem().getOwner().getId())) {
-            if (booking.getStatus().equals(Status.APPROVED)) {
+            if (booking.getStatus() == Status.APPROVED) {
                 throw new BookingException("Booking is already approved.");
             }
             if (approved.equals(true)) {
