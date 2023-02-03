@@ -106,7 +106,7 @@ public class BookingServiceImpl implements BookingService {
         log.info("Запрос списка бронирований у владельца с id " + id + " с состоянием " + state);
         List<Booking> bookings = Collections.emptyList();
         userService.getById(id);
-        Pageable page = PageRequest.of((from/size), size, sort);
+        Pageable page = PageRequest.of((from / size), size, sort);
         if (EnumUtils.isValidEnum(State.class, state)) {
             switch (State.valueOf(state)) {
                 case ALL:
@@ -144,7 +144,7 @@ public class BookingServiceImpl implements BookingService {
         log.info("Запрос списка бронирований у арендатора с id " + id + " с состоянием " + state);
         List<Booking> bookings = Collections.emptyList();
         userService.getById(id);
-        Pageable page = PageRequest.of((from/size), size, sort);
+        Pageable page = PageRequest.of((from / size), size, sort);
 
         if (EnumUtils.isValidEnum(State.class, state)) {
             switch (State.valueOf(state)) {

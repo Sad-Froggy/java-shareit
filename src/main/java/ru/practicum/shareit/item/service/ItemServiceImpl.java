@@ -118,7 +118,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDtoOut> getAll(Long userId, int from, int size) {
         log.info("Запрос списка всех вещей от пользователя с id " + userId);
-        List<Item> items = itemRepository.findAllByOwnerId(userId, PageRequest.of((from/size), size, Sort.by(ASC, "id")));
+        List<Item> items = itemRepository.findAllByOwnerId(userId, PageRequest.of((from / size), size, Sort.by(ASC, "id")));
         Map<Item, List<Booking>> bookings = bookingRepository.findByItemInAndStatus(
                         items, Status.APPROVED, Sort.by(DESC, "start"))
                 .stream()
@@ -147,7 +147,7 @@ public class ItemServiceImpl implements ItemService {
             log.info("В параметр поиска была передана пустая строка");
             return Collections.emptyList();
         }
-        return itemRepository.search(text, PageRequest.of((from/size), size)).stream()
+        return itemRepository.search(text, PageRequest.of((from / size), size)).stream()
                 .map(ItemMapper::toItemDtoOut)
                 .collect(toList());
     }

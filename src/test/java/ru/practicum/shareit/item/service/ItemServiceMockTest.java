@@ -69,11 +69,11 @@ public class ItemServiceMockTest {
 
         item = new Item(1L, "testName", "testDescription", true, user);
 
-        itemDto = new ItemDtoIn
-                (null, "testName", "testDescription", true, null);
+        itemDto = new ItemDtoIn(
+                null, "testName", "testDescription", true, null);
 
-        itemDtoUpdate = new ItemDtoIn
-                (1L, "updatedName", "updatedDescription", false, null);
+        itemDtoUpdate = new ItemDtoIn(
+                1L, "updatedName", "updatedDescription", false, null);
 
     }
 
