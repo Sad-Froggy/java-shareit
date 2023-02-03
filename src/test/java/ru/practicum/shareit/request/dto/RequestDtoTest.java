@@ -19,7 +19,7 @@ public class RequestDtoTest {
     private JacksonTester<ItemRequestDto> jacksonTester;
 
     @Test
-    public void RequestDtoJsonTest() throws IOException {
+    public void requestDtoJsonTest() throws IOException {
 
         ItemRequestDto itemRequestDto
                 = new ItemRequestDto(1L, "description", created, null);
