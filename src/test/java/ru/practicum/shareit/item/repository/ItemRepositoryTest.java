@@ -15,6 +15,10 @@ import java.util.List;
 @DataJpaTest
 public class ItemRepositoryTest {
 
+    private static final int FIRST_PAGE = 0;
+
+    private static final int SIZE_OF_10 = 10;
+
     @Autowired
     ItemRepository itemRepository;
 
@@ -50,7 +54,7 @@ public class ItemRepositoryTest {
 
     @Test
     void searchTest() {
-        List<Item> search = itemRepository.search("tESt", PageRequest.of(0, 10));
+        List<Item> search = itemRepository.search("tESt", PageRequest.of(FIRST_PAGE, SIZE_OF_10));
 
         Assertions.assertNotNull(search);
         Assertions.assertEquals(2, search.size());
@@ -58,7 +62,7 @@ public class ItemRepositoryTest {
 
     @Test
     void searchTestWithNoItemsFound() {
-        List<Item> results = itemRepository.search("noSuchSubstring", PageRequest.of(0, 10));
+        List<Item> results = itemRepository.search("noSuchSubstring", PageRequest.of(FIRST_PAGE, SIZE_OF_10));
 
         Assertions.assertNotNull(results);
         Assertions.assertEquals(0, results.size());

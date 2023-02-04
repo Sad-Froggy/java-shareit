@@ -27,6 +27,10 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 @Slf4j
 public class CommentServiceImpl implements CommentService {
 
+    private static final int FIRST_PAGE = 0;
+
+    private static final int MAX_SIZE = 10000;
+
     private final CommentRepository commentRepository;
     private final ItemService itemService;
     private final BookingRepository bookingRepository;
@@ -39,7 +43,7 @@ public class CommentServiceImpl implements CommentService {
         List<Booking> bookings = bookingRepository.findByBookerIdAndEndIsBefore(
                         userId,
                         LocalDateTime.now(),
-                        PageRequest.of(0, 999,  Sort.by(DESC, "start")))
+                        PageRequest.of(FIRST_PAGE, MAX_SIZE,  Sort.by(DESC, "start")))
                 .stream()
                 .filter(b -> b.getItem().getId().equals(itemId))
                 .collect(Collectors.toList());
