@@ -30,17 +30,17 @@ import java.util.List;
 class UserControllerTest {
 
     @MockBean
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
-    User user;
+    private User user;
 
-    UserDto userDto;
+    private UserDto userDto;
 
     @BeforeEach
     void beforeEach() {

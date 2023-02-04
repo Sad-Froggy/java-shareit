@@ -26,34 +26,28 @@ import static org.mockito.Mockito.when;
 
 public class ItemServiceMockTest {
 
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
-    ItemService itemService;
+    private ItemService itemService;
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    BookingRepository bookingRepository;
+    private RequestRepository requestRepository;
 
-    CommentRepository commentRepository;
+    private User user;
 
-    RequestRepository requestRepository;
+    private User secondUser;
 
-    User user;
+    private Item item;
 
-    User secondUser;
-
-    Item item;
-
-    ItemDtoIn itemDto;
-
-    ItemDtoIn itemDtoUpdate;
+    private ItemDtoIn itemDto;
 
     @BeforeEach
     void beforeEach() {
         userRepository = Mockito.mock(UserRepository.class);
         itemRepository = Mockito.mock(ItemRepository.class);
-        bookingRepository = Mockito.mock(BookingRepository.class);
-        commentRepository = Mockito.mock(CommentRepository.class);
+        BookingRepository bookingRepository = Mockito.mock(BookingRepository.class);
+        CommentRepository commentRepository = Mockito.mock(CommentRepository.class);
         requestRepository = Mockito.mock(RequestRepository.class);
         itemService = new ItemServiceImpl(
                 requestRepository,
@@ -71,9 +65,6 @@ public class ItemServiceMockTest {
 
         itemDto = new ItemDtoIn(
                 null, "testName", "testDescription", true, null);
-
-        itemDtoUpdate = new ItemDtoIn(
-                1L, "updatedName", "updatedDescription", false, null);
 
     }
 

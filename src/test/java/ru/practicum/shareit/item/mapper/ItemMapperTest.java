@@ -16,9 +16,9 @@ import static ru.practicum.shareit.item.mapper.ItemMapper.toItemDtoOut;
 
 public class ItemMapperTest {
 
-    User owner = new User(1L, "name", "email@mail.ru");
-    User requestor = new User(1L, "requestor", "requestor@mail.ru");
-    ItemRequest itemRequest = new ItemRequest(1L, "description", requestor, LocalDateTime.now());
+    private final User owner = new User(1L, "name", "email@mail.ru");
+    private final User requestor = new User(1L, "requestor", "requestor@mail.ru");
+    private final ItemRequest itemRequest = new ItemRequest(1L, "description", requestor, LocalDateTime.now());
 
     @Test
     void toItemDtoOutTest() {

@@ -15,7 +15,7 @@ import static ru.practicum.shareit.request.mapper.RequestMapper.toItemRequestDto
 
 public class RequestMapperTest {
 
-    User requestor = new User(1L, "requestor", "requestor@mail.ru");
+    private final User requestor = new User(1L, "requestor", "requestor@mail.ru");
 
     @Test
     void toItemRequestTest() {

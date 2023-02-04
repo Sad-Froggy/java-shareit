@@ -20,35 +20,25 @@ public class ItemRepositoryTest {
     private static final int SIZE_OF_10 = 10;
 
     @Autowired
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
     @Autowired
-    UserRepository userRepository;
-
-    User user;
-
-    Item item;
-
-    Item secondItem;
-
-    Item thirdItem;
-
-    Item fourthItem;
+    private UserRepository userRepository;
 
     @BeforeEach
     void beforeEach() {
-        user = userRepository.save(new User(1L, "testName", "test@mail.com"));
+        User user = userRepository.save(new User(1L, "testName", "test@mail.com"));
 
-        item = itemRepository
+        itemRepository
                 .save(new Item(1L, "testName", "Description", true, user));
 
-        secondItem = itemRepository
+        itemRepository
                 .save(new Item(2L, "secondName", "secondTestDescription", true, user));
 
-        thirdItem = itemRepository
+        itemRepository
                 .save(new Item(3L, "имя", "описание", true, user));
 
-        fourthItem = itemRepository
+        itemRepository
                 .save(new Item(4L, "fourthName", "secondTestDescription", false, user));
     }
 

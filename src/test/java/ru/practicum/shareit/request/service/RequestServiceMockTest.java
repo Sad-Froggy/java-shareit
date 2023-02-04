@@ -29,17 +29,24 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class RequestServiceMockTest {
     @InjectMocks
-    RequestServiceImpl requestService;
+    private RequestServiceImpl requestService;
+
     @Mock
-    RequestRepository requestRepository;
+    private RequestRepository requestRepository;
+
     @Mock
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
+
     @Mock
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
 
     private ItemRequestDto itemRequestDto;
+
     private ItemRequest request;
+
     private User requestor;
+
     private Item item;
 
     @BeforeEach

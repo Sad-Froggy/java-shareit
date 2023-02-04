@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
-import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserService;
 
@@ -26,20 +25,17 @@ public class RequestServiceIntegrationTests {
 
     private final UserService userService;
 
-    ItemRequestDto requestDto;
+    private ItemRequestDto requestDto;
 
-    ItemRequest itemRequest;
+    private User owner;
 
-    User owner;
-
-    User requestor;
+    private User requestor;
 
     @BeforeEach
     void beforeEach() {
         owner = new User(1L, "owner", "owner@mail.ru");
         requestor = new User(2L, "requestor", "requestor@mail.ru");
         requestDto = new ItemRequestDto(null, "description", null, null);
-        itemRequest = new ItemRequest(null, "description", null, null);
     }
 
 

@@ -37,13 +37,13 @@ public class BookingServiceIntegrationTest {
 
     private final ItemService itemService;
 
-    BookingDtoIn bookingDtoIn;
+    private BookingDtoIn bookingDtoIn;
 
-    ItemDtoIn itemDtoIn;
+    private ItemDtoIn itemDtoIn;
 
-    User owner;
+    private User owner;
 
-    User booker;
+    private User booker;
 
     @BeforeEach
     void beforeEach() {

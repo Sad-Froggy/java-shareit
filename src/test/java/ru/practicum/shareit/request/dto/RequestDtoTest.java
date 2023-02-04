@@ -14,7 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @JsonTest
 public class RequestDtoTest {
 
-    LocalDateTime created = LocalDateTime.of(2023, 2, 3, 9, 0, 1);
+    private static final LocalDateTime CREATED = LocalDateTime.of(2023, 2, 3, 9, 0, 1);
+
     @Autowired
     private JacksonTester<ItemRequestDto> jacksonTester;
 
@@ -22,7 +23,7 @@ public class RequestDtoTest {
     public void requestDtoJsonTest() throws IOException {
 
         ItemRequestDto itemRequestDto
-                = new ItemRequestDto(1L, "description", created, null);
+                = new ItemRequestDto(1L, "description", CREATED, null);
 
         JsonContent<ItemRequestDto> result = jacksonTester.write(itemRequestDto);
 

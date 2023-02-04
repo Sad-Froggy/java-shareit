@@ -18,7 +18,6 @@ import ru.practicum.shareit.item.model.dto.ItemDtoIn;
 import ru.practicum.shareit.item.model.dto.ItemDtoOut;
 import ru.practicum.shareit.item.service.ItemService;
 import ru.practicum.shareit.user.model.User;
-import ru.practicum.shareit.user.model.dto.UserDto;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -35,31 +34,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ItemControllerTest {
 
     @MockBean
-    ItemService itemService;
+    private ItemService itemService;
 
     @MockBean
     private CommentService commentService;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
-    User user;
+    private Item item;
 
-    UserDto userDto;
+    private ItemDtoIn itemDtoIn;
 
-    Item item;
-
-    ItemDtoIn itemDtoIn;
-
-    ItemDtoOut itemDtoOut;
+    private ItemDtoOut itemDtoOut;
 
     @BeforeEach
     void beforeEach() {
-        user = new User(1L, "name", "email@mail.ru");
-        userDto = new UserDto(1L, "name", "email@mail.ru");
+        User user = new User(1L, "name", "email@mail.ru");
         item = new Item(1L, "name", "description", true, user);
         itemDtoIn = new ItemDtoIn(null, "name", "description", true, null);
         itemDtoOut = new ItemDtoOut(1L, "name", "description", true, null);

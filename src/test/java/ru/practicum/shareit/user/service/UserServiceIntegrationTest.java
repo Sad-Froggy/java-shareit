@@ -23,11 +23,11 @@ public class UserServiceIntegrationTest {
 
     private final UserService userService;
 
-    UserDto updateUser;
+    private UserDto updateUser;
 
-    User user;
+    private User user;
 
-    User anotherUser;
+    private User anotherUser;
 
 
     @BeforeEach

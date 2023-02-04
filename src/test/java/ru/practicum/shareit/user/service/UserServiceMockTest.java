@@ -17,12 +17,16 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 public class UserServiceMockTest {
-    UserRepository userRepository;
-    UserService userService;
 
-    User user;
-    User updateUser;
-    UserDto userDto;
+    private UserRepository userRepository;
+
+    private UserService userService;
+
+    private User user;
+
+    private User updateUser;
+
+    private UserDto userDto;
 
     @BeforeEach
     void beforeEach() {

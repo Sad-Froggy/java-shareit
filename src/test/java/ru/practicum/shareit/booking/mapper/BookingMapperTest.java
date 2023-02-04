@@ -20,11 +20,11 @@ public class BookingMapperTest {
 
     private static final LocalDateTime END = LocalDateTime.of(2033, 2, 4, 9, 0);
 
-    User owner = new User(1L, "name", "email@mail.ru");
+    private final User owner = new User(1L, "name", "email@mail.ru");
 
-    User booker = new User(2L, "secondName", "secondEmail@mail.ru");
+    private final User booker = new User(2L, "secondName", "secondEmail@mail.ru");
 
-    Item item = new Item(1L, "name", "description", true, owner);
+    private final Item item = new Item(1L, "name", "description", true, owner);
 
     @Test
     public void toBookingDtoOutTest() {

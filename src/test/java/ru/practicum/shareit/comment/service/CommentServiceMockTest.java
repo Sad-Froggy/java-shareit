@@ -33,33 +33,31 @@ import static org.mockito.Mockito.when;
 public class CommentServiceMockTest {
 
     @InjectMocks
-    CommentServiceImpl commentService;
+    private CommentServiceImpl commentService;
 
     @Mock
     private ItemService itemService;
 
     @Mock
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
     @Mock
-    BookingRepository bookingRepository;
+    private BookingRepository bookingRepository;
 
-    User owner;
+    private User booker;
 
-    User booker;
+    private Item item;
 
-    Item item;
+    private Booking booking;
 
-    Booking booking;
+    private Comment comment;
 
-    Comment comment;
-
-    CommentDto commentDto;
+    private CommentDto commentDto;
 
     @BeforeEach
     void beforeEach() {
         LocalDateTime commentTime = LocalDateTime.now().minusHours(1);
-        owner = new User(1L, "owner", "owner@mail.ru");
+        User owner = new User(1L, "owner", "owner@mail.ru");
         booker = new User(2L, "booker", "booker@mail.ru");
         item = new Item(1L, "name", "description", true, owner);
         comment = new Comment(1L, "text", item, booker, commentTime);

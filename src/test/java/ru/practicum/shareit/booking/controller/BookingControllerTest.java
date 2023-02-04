@@ -12,11 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.shareit.booking.dto.BookingDtoIn;
 import ru.practicum.shareit.booking.dto.BookingDtoOut;
-import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.Status;
 import ru.practicum.shareit.booking.service.BookingService;
-import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.user.model.User;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -37,37 +34,20 @@ public class BookingControllerTest {
     private static final LocalDateTime END = LocalDateTime.now().plusDays(2);
 
     @MockBean
-    BookingService bookingService;
+    private static BookingService bookingService;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
-    Item item;
+    private BookingDtoIn bookingDtoIn;
 
-    User owner;
-
-    User booker;
-
-    Booking booking;
-
-    BookingDtoIn bookingDtoIn;
-
-    BookingDtoOut bookingDtoOut;
+    private BookingDtoOut bookingDtoOut;
 
     @BeforeEach
     void beforeEach() {
-
-        owner = new User(1L, "name", "email@mail.ru");
-
-        booker = new User(2L, "secondName", "secondEmail@mail.ru");
-
-        item = new Item(1L, "name", "description", true, owner);
-
-        booking = new Booking(1L, START, END, item, booker, Status.WAITING);
-
         bookingDtoIn = new BookingDtoIn(1L, START, END, 1L);
 
         bookingDtoOut = new BookingDtoOut(1L,

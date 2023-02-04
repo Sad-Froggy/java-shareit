@@ -15,7 +15,7 @@ import static ru.practicum.shareit.comment.mapper.CommentMapper.toCommentDto;
 
 public class CommentMapperTest {
 
-    LocalDateTime commentTime = LocalDateTime.now().minusDays(1);
+    private final LocalDateTime commentTime = LocalDateTime.now().minusDays(1);
 
     @Test
     void toCommentTest() {

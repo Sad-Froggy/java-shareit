@@ -45,19 +45,19 @@ public class ItemServiceIntegrationTest {
 
     private final CommentService commentService;
 
-    ItemDtoIn itemDtoIn;
+    private ItemDtoIn itemDtoIn;
 
-    ItemDtoIn secondItemDtoIn;
+    private ItemDtoIn secondItemDtoIn;
 
-    ItemRequestDto itemRequestDto;
+    private ItemRequestDto itemRequestDto;
 
-    User user;
+    private User user;
 
-    User secondUser;
+    private User secondUser;
 
-    BookingDtoIn bookingDtoIn;
+    private BookingDtoIn bookingDtoIn;
 
-    CommentDto commentDto;
+    private CommentDto commentDto;
 
     @BeforeEach
     void beforeEach() {
