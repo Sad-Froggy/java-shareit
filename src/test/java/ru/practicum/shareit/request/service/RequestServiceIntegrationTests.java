@@ -43,12 +43,11 @@ public class RequestServiceIntegrationTests {
     void createTest() {
         User savedRequestor = userService.create(requestor);
         ItemRequestDto savedRequest = requestService.create(savedRequestor.getId(), requestDto);
+        ItemRequestDto foundRequest = requestService.findByRequestId(savedRequestor.getId(), savedRequest.getId());
 
         assertNotNull(savedRequest);
-        assertEquals(savedRequest.getId(),
-                requestService.findByRequestId(savedRequestor.getId(), savedRequest.getId()).getId());
-        assertEquals(savedRequest.getDescription(),
-                requestService.findByRequestId(savedRequestor.getId(), savedRequest.getId()).getDescription());
+        assertEquals(savedRequest.getId(), foundRequest.getId());
+        assertEquals(savedRequest.getDescription(), foundRequest.getDescription());
     }
 
     @Test

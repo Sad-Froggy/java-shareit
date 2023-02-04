@@ -89,23 +89,24 @@ public class ItemServiceIntegrationTest {
         bookingDtoIn.setItemId(savedItem.getId());
         bookingService.create(bookingDtoIn, bookerUser.getId());
         CommentDto savedComment = commentService.create(commentDto, savedItem.getId(), bookerUser.getId());
+        ItemDtoOut foundItem = itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId());
 
-        assertNotNull(itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getId());
+        assertNotNull(foundItem);
         assertEquals(
                 savedItem.getId(),
-                itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getId());
+                foundItem.getId());
         assertEquals(
                 savedItem.getName(),
-                itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getName());
+                foundItem.getName());
         assertEquals(
                 savedItem.getDescription(),
-                itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getDescription());
+                foundItem.getDescription());
         assertEquals(
                 savedItem.getRequestId(),
-                itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getRequestId());
+                foundItem.getRequestId());
         assertEquals(
                 savedComment.getText(),
-                itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getComments().get(0).getText());
+                foundItem.getComments().get(0).getText());
     }
 
     @Test
@@ -117,14 +118,13 @@ public class ItemServiceIntegrationTest {
                 savedItem.getId(), "updatedName", "updatedDescription", false, null);
 
         ItemDtoOut updatedItem = itemService.update(itemForUpdate, savedUser.getId());
+        ItemDtoOut foundItem = itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId());
 
-        assertNotNull(itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()));
+        assertNotNull(foundItem);
         assertEquals(updatedItem.getId(), savedItem.getId());
         assertEquals(updatedItem.getName(), itemForUpdate.getName());
         assertEquals(updatedItem.getDescription(), itemForUpdate.getDescription());
-        assertEquals(
-                updatedItem.getId(),
-                itemService.getByItemIdAndUserId(savedUser.getId(), savedItem.getId()).getId());
+        assertEquals(foundItem.getId(), updatedItem.getId());
     }
 
     @Test
@@ -133,7 +133,7 @@ public class ItemServiceIntegrationTest {
         ItemDtoOut savedItem = itemService.create(itemDtoIn, createdUser.getId());
         ItemDtoOut foundItem = itemService.getByItemIdAndUserId(user.getId(), savedItem.getId());
 
-        assertNotNull(itemService.getByItemIdAndUserId(user.getId(), foundItem.getId()));
+        assertNotNull(foundItem);
         assertEquals(savedItem.getId(), foundItem.getId());
         assertEquals(savedItem.getName(), foundItem.getName());
         assertEquals(savedItem.getDescription(), foundItem.getDescription());

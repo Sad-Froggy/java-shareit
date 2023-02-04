@@ -60,13 +60,14 @@ public class BookingServiceIntegrationTest {
         ItemDtoOut savedItem = itemService.create(itemDtoIn, savedOwner.getId());
         bookingDtoIn.setItemId(savedItem.getId());
         BookingDtoOut savedBooking = bookingService.create(bookingDtoIn, savedBooker.getId());
+        BookingDtoOut foundBooking = bookingService.getById(savedBooking.getId(), savedOwner.getId());
 
         assertNotNull(savedBooking);
-        assertEquals(bookingService.getById(savedBooking.getId(), savedOwner.getId()).getId(), savedBooking.getId());
-        assertEquals(bookingService.getById(savedBooking.getId(), savedOwner.getId()).getStart(), savedBooking.getStart());
-        assertEquals(bookingService.getById(savedBooking.getId(), savedOwner.getId()).getEnd(), savedBooking.getEnd());
-        assertEquals(bookingService.getById(savedBooking.getId(), savedOwner.getId()).getItem().getId(), savedBooking.getItem().getId());
-        assertEquals(bookingService.getById(savedBooking.getId(), savedOwner.getId()).getStatus(), Status.WAITING);
+        assertEquals(foundBooking.getId(), savedBooking.getId());
+        assertEquals(foundBooking.getStart(), savedBooking.getStart());
+        assertEquals(foundBooking.getEnd(), savedBooking.getEnd());
+        assertEquals(foundBooking.getItem().getId(), savedBooking.getItem().getId());
+        assertEquals(foundBooking.getStatus(), Status.WAITING);
 
     }
 
@@ -78,13 +79,14 @@ public class BookingServiceIntegrationTest {
         bookingDtoIn.setItemId(savedItem.getId());
         BookingDtoOut savedBooking = bookingService.create(bookingDtoIn, savedBooker.getId());
         BookingDtoOut updatedBooking = bookingService.update(savedBooking.getId(), savedOwner.getId(), true);
+        BookingDtoOut foundBooking = bookingService.getById(updatedBooking.getId(), savedOwner.getId());
 
         assertNotNull(updatedBooking);
-        assertEquals(savedBooking.getId(), bookingService.getById(updatedBooking.getId(), savedOwner.getId()).getId());
-        assertEquals(savedBooking.getStart(), bookingService.getById(updatedBooking.getId(), savedOwner.getId()).getStart());
-        assertEquals(savedBooking.getEnd(), bookingService.getById(updatedBooking.getId(), savedOwner.getId()).getEnd());
-        assertEquals(savedBooking.getItem().getId(), bookingService.getById(updatedBooking.getId(), savedOwner.getId()).getItem().getId());
-        assertEquals(Status.APPROVED, bookingService.getById(updatedBooking.getId(), savedOwner.getId()).getStatus());
+        assertEquals(savedBooking.getId(), foundBooking.getId());
+        assertEquals(savedBooking.getStart(), foundBooking.getStart());
+        assertEquals(savedBooking.getEnd(), foundBooking.getEnd());
+        assertEquals(savedBooking.getItem().getId(), foundBooking.getItem().getId());
+        assertEquals(Status.APPROVED, foundBooking.getStatus());
     }
 
     @Test
