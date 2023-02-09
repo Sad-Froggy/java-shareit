@@ -1,4 +1,4 @@
-package ru.practicum.shareit.exception_handler;
+package ru.practicum.shareit.exceptionHandler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.shareit.booking.controller.BookingController;
-import ru.practicum.shareit.exception_handler.exception.WrongBookingStateException;
+import ru.practicum.shareit.exceptionHandler.exception.WrongBookingStateException;
 import ru.practicum.shareit.item.controller.ItemController;
 import ru.practicum.shareit.user.controller.UserController;
 

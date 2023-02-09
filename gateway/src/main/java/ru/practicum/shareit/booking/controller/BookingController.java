@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.client.BookingClient;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.State;
-import ru.practicum.shareit.exception_handler.exception.WrongBookingStateException;
+import ru.practicum.shareit.exceptionHandler.exception.WrongBookingStateException;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
