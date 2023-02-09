@@ -12,7 +12,6 @@ import ru.practicum.shareit.user.controller.UserController;
 
 @Slf4j
 @RestControllerAdvice(assignableTypes = {ItemController.class, UserController.class, BookingController.class})
-
 public class ExceptionsHandler {
 
     @ExceptionHandler
