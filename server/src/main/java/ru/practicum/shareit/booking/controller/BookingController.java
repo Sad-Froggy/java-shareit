@@ -1,20 +1,16 @@
 package ru.practicum.shareit.booking.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.model.dto.BookingDtoIn;
 import ru.practicum.shareit.booking.model.dto.BookingDtoOut;
 import ru.practicum.shareit.booking.service.BookingService;
 
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/bookings")
 @RequiredArgsConstructor
-@Validated
 public class BookingController {
 
     private final BookingService bookingService;
@@ -22,7 +18,7 @@ public class BookingController {
 
     @PostMapping
     public BookingDtoOut create(@RequestHeader(SHARER_USER_ID) Long userId,
-                                @Validated @RequestBody BookingDtoIn bookingDto) {
+                                @RequestBody BookingDtoIn bookingDto) {
         return bookingService.create(bookingDto, userId);
     }
 
@@ -43,9 +39,9 @@ public class BookingController {
     public List<BookingDtoOut> getByOwner(@RequestParam(value = "state", defaultValue = "ALL") String state,
                                           @RequestHeader(SHARER_USER_ID) Long userId,
                                           @RequestParam(value = "from", defaultValue = "0")
-                                          @PositiveOrZero int from,
+                                          int from,
                                           @RequestParam(value = "size", defaultValue = "10")
-                                          @Positive int size) {
+                                          int size) {
         return bookingService.getByOwner(userId, state, from, size);
     }
 
@@ -53,9 +49,9 @@ public class BookingController {
     public List<BookingDtoOut> getByBooker(@RequestParam(value = "state", defaultValue = "ALL") String state,
                                            @RequestHeader(SHARER_USER_ID) Long userId,
                                            @RequestParam(value = "from", defaultValue = "0")
-                                           @PositiveOrZero int from,
+                                           int from,
                                            @RequestParam(value = "size", defaultValue = "10")
-                                           @Positive int size) {
+                                           int size) {
         return bookingService.getByBooker(userId, state, from, size);
     }
 

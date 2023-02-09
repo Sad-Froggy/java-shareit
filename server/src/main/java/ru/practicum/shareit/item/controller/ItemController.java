@@ -8,9 +8,7 @@ import ru.practicum.shareit.item.model.dto.ItemDtoIn;
 import ru.practicum.shareit.item.model.dto.ItemDtoOut;
 import ru.practicum.shareit.item.service.ItemService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
+
 import java.util.List;
 
 @RestController
@@ -23,7 +21,7 @@ public class ItemController {
     private static final String SHARER_USER_ID = "X-Sharer-User-Id";
 
     @PostMapping
-    public ItemDtoOut create(@RequestBody @Valid ItemDtoIn itemDto,
+    public ItemDtoOut create(@RequestBody ItemDtoIn itemDto,
                              @RequestHeader(SHARER_USER_ID) Long userId) {
         return itemService.create(itemDto, userId);
     }
@@ -45,9 +43,9 @@ public class ItemController {
     @GetMapping
     public List<ItemDtoOut> getItems(@RequestHeader(SHARER_USER_ID) Long userId,
                                      @RequestParam(value = "from", defaultValue = "0")
-                                     @PositiveOrZero int from,
+                                     int from,
                                      @RequestParam(value = "size", defaultValue = "10")
-                                     @Positive int size) {
+                                     int size) {
         return itemService.getAll(userId, from, size);
     }
 
@@ -55,14 +53,14 @@ public class ItemController {
     public List<ItemDtoOut> getItemsByText(@RequestHeader(SHARER_USER_ID) Long userId,
                                            @RequestParam("text") String text,
                                            @RequestParam(value = "from", defaultValue = "0")
-                                               @PositiveOrZero int from,
+                                               int from,
                                            @RequestParam(value = "size", defaultValue = "10")
-                                               @Positive int size) {
+                                               int size) {
         return itemService.getByText(text, userId, from, size);
     }
 
     @PostMapping("/{itemId}/comment")
-    public CommentDto createComment(@Valid @RequestBody CommentDto commentDto,
+    public CommentDto createComment(@RequestBody CommentDto commentDto,
                                     @PathVariable("itemId") Long itemId,
                                     @RequestHeader(SHARER_USER_ID) Long userId) {
         return commentService.create(commentDto, itemId, userId);
