@@ -16,7 +16,9 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
+
     private final UserClient userClient;
+
     @GetMapping
     public ResponseEntity<Object> getUsers() {
         log.info("Gateway-UserController: запрос получения списка всех пользователей");
