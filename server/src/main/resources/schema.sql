@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS public CASCADE;
+DROP TABLE IF EXISTS booking, items, requests, users, comments;
 CREATE SCHEMA IF NOT EXISTS public;
 
 CREATE TABLE IF NOT EXISTS users
