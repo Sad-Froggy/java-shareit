@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.request.client.ItemRequestClient;
 import ru.practicum.shareit.request.dto.RequestDto;
@@ -16,6 +17,7 @@ import javax.validation.constraints.PositiveOrZero;
 @RequiredArgsConstructor
 @RequestMapping("/requests")
 @Slf4j
+@Validated
 public class ItemRequestController {
 
     public static final String SHARER_USER_ID = "X-Sharer-User-Id";
